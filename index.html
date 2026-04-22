@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Cup 2026 — Live Prediction Dashboard</title>
+  <meta name="description" content="AI-powered World Cup 2026 prediction dashboard. ELO ratings, group stage simulator, head-to-head history, win probability engine, and bracket visualizer." />
+  <meta property="og:title" content="World Cup 2026 Prediction Dashboard" />
+  <meta property="og:description" content="Real-time WC2026 predictions, ELO ratings, group stage simulator." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">⚽</div>
+      <span class="nav-logo-text">WC2026.AI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#contenders" class="active" id="nav-contenders">Contenders</a></li>
+      <li><a href="#predictor" id="nav-predictor">Win Predictor</a></li>
+      <li><a href="#groups" id="nav-groups">Groups</a></li>
+      <li><a href="#h2h" id="nav-h2h">Head-to-Head</a></li>
+      <li><a href="#squads" id="nav-squads">Squads</a></li>
+      <li><a href="#bracket" id="nav-bracket">Bracket</a></li>
+    </ul>
+    <div class="nav-badge">
+      <span class="live-dot"></span>
+      WC 2026 · USA/CAN/MEX
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">⚽ Powered by ELO Ratings &amp; Historical Data</div>
+    <h1 class="hero-title">World Cup 2026<br/>Prediction Engine</h1>
+    <p class="hero-subtitle">
+      AI-driven predictions for all 48 nations. Simulate group stages, analyze head-to-head history, and track win probabilities for the biggest tournament on Earth.
+    </p>
+
+    <!-- Countdown -->
+    <div class="countdown" id="countdown">
+      <div class="countdown-unit">
+        <div class="countdown-val" id="cd-days">—</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-val" id="cd-hours">—</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-val" id="cd-mins">—</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-val" id="cd-secs">—</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div>
+
+    <!-- Odds Ticker -->
+    <div class="odds-ticker">
+      <div class="odds-ticker-inner" id="ticker"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OVERVIEW STATS ===================== -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="stats-row anim-up">
+      <div class="stat-card">
+        <div class="stat-icon">🌍</div>
+        <div class="stat-val">48</div>
+        <div class="stat-name">Nations Competing</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚽</div>
+        <div class="stat-val">104</div>
+        <div class="stat-name">Total Matches</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏟️</div>
+        <div class="stat-val">16</div>
+        <div class="stat-name">Host Stadiums</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🥇</div>
+        <div class="stat-val" id="top-favorite">—</div>
+        <div class="stat-name">Top Favorite</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-val">ELO</div>
+        <div class="stat-name">Rating System</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div class="stat-val">Jun '26</div>
+        <div class="stat-name">Tournament Start</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTENDERS ===================== -->
+<section class="section" id="contenders">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">ELO Rankings</div>
+        <h2 class="section-title">Title <span>Contenders</span></h2>
+      </div>
+      <div class="tabs" id="conf-tabs">
+        <button class="tab-btn active" data-conf="all">All</button>
+        <button class="tab-btn" data-conf="UEFA">UEFA</button>
+        <button class="tab-btn" data-conf="CONMEBOL">CONMEBOL</button>
+        <button class="tab-btn" data-conf="CONCACAF">CONCACAF</button>
+        <button class="tab-btn" data-conf="AFC">AFC</button>
+        <button class="tab-btn" data-conf="CAF">CAF</button>
+      </div>
+    </div>
+    <div class="contenders-grid" id="contenders-grid"></div>
+  </div>
+</section>
+
+<!-- ===================== WIN PREDICTOR ===================== -->
+<section class="section" id="predictor">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">ELO-Based Model</div>
+        <h2 class="section-title">Win <span>Probability</span></h2>
+      </div>
+    </div>
+
+    <div class="matchup-selector">
+      <select class="team-select" id="pred-team1"></select>
+      <div class="vs-badge">VS</div>
+      <select class="team-select" id="pred-team2"></select>
+      <button class="btn btn-primary" id="predict-btn">⚡ Calculate</button>
+    </div>
+
+    <div id="pred-result" style="display:none">
+      <div class="prob-result">
+        <div class="prob-teams-row">
+          <div class="prob-team">
+            <div class="prob-team-flag" id="pr-flag1"></div>
+            <div class="prob-team-name" id="pr-name1"></div>
+            <div class="prob-team-pct win" id="pr-pct1"></div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Draw</div>
+            <div style="font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;color:var(--accent-gold)" id="pr-draw"></div>
+          </div>
+          <div class="prob-team">
+            <div class="prob-team-flag" id="pr-flag2"></div>
+            <div class="prob-team-name" id="pr-name2"></div>
+            <div class="prob-team-pct lose" id="pr-pct2"></div>
+          </div>
+        </div>
+        <div class="prob-bar-big">
+          <div class="prob-bar-big-fill" id="pr-bar1"></div>
+          <div class="prob-bar-big-draw" id="pr-bar-draw"></div>
+          <div class="prob-bar-big-fill2" id="pr-bar2"></div>
+        </div>
+      </div>
+
+      <div class="radar-wrap">
+        <div class="chart-box">
+          <div class="chart-title">Team Strength Radar</div>
+          <canvas id="radarChart" height="300"></canvas>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title">ELO Rating Comparison</div>
+          <canvas id="eloBarChart" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GROUPS ===================== -->
+<section class="section" id="groups">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Group Stage Simulator</div>
+        <h2 class="section-title">Group <span>Standings</span></h2>
+      </div>
+      <button class="btn btn-outline" id="sim-btn">🎲 Simulate All Groups</button>
+    </div>
+    <div class="groups-grid" id="groups-grid"></div>
+  </div>
+</section>
+
+<!-- ===================== HEAD-TO-HEAD ===================== -->
+<section class="section" id="h2h">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Historical Records</div>
+        <h2 class="section-title">Head-to-<span>Head</span></h2>
+      </div>
+    </div>
+
+    <div class="matchup-selector" style="margin-bottom:24px">
+      <select class="team-select" id="h2h-team1"></select>
+      <div class="vs-badge">VS</div>
+      <select class="team-select" id="h2h-team2"></select>
+      <button class="btn btn-primary" id="h2h-btn">📊 View History</button>
+    </div>
+
+    <div id="h2h-result"></div>
+  </div>
+</section>
+
+<!-- ===================== SQUADS ===================== -->
+<section class="section" id="squads">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Player Data</div>
+        <h2 class="section-title">Squad <span>Analysis</span></h2>
+      </div>
+      <select class="team-select" id="squad-team" style="max-width:200px"></select>
+    </div>
+    <div class="card" id="squad-display"></div>
+  </div>
+</section>
+
+<!-- ===================== BRACKET ===================== -->
+<section class="section" id="bracket">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Tournament Path</div>
+        <h2 class="section-title">Predicted <span>Bracket</span></h2>
+      </div>
+      <button class="btn btn-primary" id="gen-bracket-btn">🔮 Generate Bracket</button>
+    </div>
+    <div class="card bracket-container">
+      <div class="bracket" id="bracket-view">
+        <div style="color:var(--text-muted);font-size:14px;padding:40px;text-align:center;width:100%">
+          Click "Generate Bracket" to simulate the full tournament based on ELO ratings.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">WC2026.AI</div>
+    <p>Built for the hackathon · Data from FBref &amp; public FIFA ELO sources · Not affiliated with FIFA</p>
+    <p style="margin-top:8px">World Cup 2026 · USA · Canada · Mexico · June–July 2026</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
