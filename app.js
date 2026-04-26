@@ -355,38 +355,22 @@ function populateSelects() {
   document.getElementById('squad-team').innerHTML = squadOpts;
 }
 async function runPredictor() {
-  console.log("BUTTON CLICKED");
-
-  const code1 = document.getElementById('pred-team1').value;
-  const code2 = document.getElementById('pred-team2').value;
-
-  if (code1 === code2) return;
-
-  const t1 = ELO_DATA.teams.find(t => t.code === code1);
-  const t2 = ELO_DATA.teams.find(t => t.code === code2);
-
-  if (!t1 || !t2) {
-    console.error("Teams not found");
-    return;
-  }
-
   console.log("Calling API...");
 
+  const team1 = document.getElementById('pred-team1').value;
+  const team2 = document.getElementById('pred-team2').value;
+
+  if (team1 === team2) return;
+
+  const url = `https://worldcup-predictor.hub.zerve.cloud/predict?team1=${team1}&team2=${team2}`;
+
   try {
-    const res = await fetch(
-      `https://worldcup-predictor.hub.zerve.cloud/predict?team1=${encodeURIComponent(t1.name)}&team2=${encodeURIComponent(t2.name)}`
-    );
+    const response = await fetch(url);
+    const data = await response.json();
 
-    if (!res.ok) throw new Error("API failed");
-
-    const data = await res.json();
     console.log("API RESULT:", data);
 
-    // ================= UI UPDATE =================
-    document.getElementById('pr-flag1').innerHTML = flagImg(t1.code, 72);
     document.getElementById('pr-name1').textContent = data.team1;
-
-    document.getElementById('pr-flag2').innerHTML = flagImg(t2.code, 72);
     document.getElementById('pr-name2').textContent = data.team2;
 
     document.getElementById('pr-pct1').textContent = (data.team1_win * 100).toFixed(1) + '%';
@@ -399,43 +383,11 @@ async function runPredictor() {
 
     document.getElementById('pred-result').style.display = 'block';
 
-    // Convert API → chart format
-    const prob = {
-      win: data.team1_win,
-      lose: data.team2_win,
-      draw: data.draw
-    };
-
-    buildRadarChart(t1, t2);
-    buildEloBar(t1, t2, prob);
-
-  } catch (err) {
-    console.error("API ERROR → using fallback", err);
-
-    // ===== FALLBACK (your old ELO logic) =====
-    const prob = calcMatchProbs(t1.elo, t2.elo);
-
-    document.getElementById('pr-flag1').innerHTML = flagImg(t1.code, 72);
-    document.getElementById('pr-name1').textContent = t1.name;
-
-    document.getElementById('pr-flag2').innerHTML = flagImg(t2.code, 72);
-    document.getElementById('pr-name2').textContent = t2.name;
-
-    document.getElementById('pr-pct1').textContent = (prob.win * 100).toFixed(1) + '%';
-    document.getElementById('pr-pct2').textContent = (prob.lose * 100).toFixed(1) + '%';
-    document.getElementById('pr-draw').textContent = (prob.draw * 100).toFixed(1) + '%';
-
-    document.getElementById('pr-bar1').style.width = (prob.win * 100) + '%';
-    document.getElementById('pr-bar2').style.width = (prob.lose * 100) + '%';
-    document.getElementById('pr-bar-draw').style.width = (prob.draw * 100) + '%';
-
-    document.getElementById('pred-result').style.display = 'block';
-
-    buildRadarChart(t1, t2);
-    buildEloBar(t1, t2, prob);
+  } catch (error) {
+    console.error("API FAILED:", error);
+    alert("API not reachable — check deployment");
   }
 }
-
 
 
 
