@@ -1,4 +1,4 @@
-console.log("NEW VERSION LOADED 🚀");
+console.log("APP JS VERSION 2 LOADED");
 
 async function getPrediction(team1, team2) {
   const url = `https://worldcup-predictor.hub.zerve.cloud/predict?team1=${team1}&team2=${team2}`;
