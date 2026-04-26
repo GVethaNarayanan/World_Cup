@@ -1,0 +1,70 @@
+{
+  "squads": {
+    "FRA": {
+      "players": [
+        {"name": "Kylian Mbappé", "pos": "FW", "club": "Real Madrid", "age": 27, "goals": 8, "form": 9.2},
+        {"name": "Antoine Griezmann", "pos": "FW", "club": "Atlético Madrid", "age": 35, "goals": 5, "form": 7.8},
+        {"name": "Ousmane Dembélé", "pos": "FW", "club": "PSG", "age": 29, "goals": 6, "form": 8.1},
+        {"name": "N'Golo Kanté", "pos": "MF", "club": "Al-Ittihad", "age": 35, "goals": 1, "form": 7.2},
+        {"name": "Aurélien Tchouaméni", "pos": "MF", "club": "Real Madrid", "age": 25, "goals": 2, "form": 8.4},
+        {"name": "Mike Maignan", "pos": "GK", "club": "AC Milan", "age": 29, "goals": 0, "form": 8.6}
+      ],
+      "avg_age": 28, "goals_per_game": 2.1, "defense_rating": 88, "attack_rating": 93
+    },
+    "BRA": {
+      "players": [
+        {"name": "Vinicius Jr.", "pos": "FW", "club": "Real Madrid", "age": 24, "goals": 11, "form": 9.4},
+        {"name": "Rodrygo", "pos": "FW", "club": "Real Madrid", "age": 24, "goals": 7, "form": 8.5},
+        {"name": "Raphinha", "pos": "FW", "club": "Barcelona", "age": 28, "goals": 9, "form": 8.8},
+        {"name": "Bruno Guimarães", "pos": "MF", "club": "Newcastle", "age": 27, "goals": 3, "form": 8.3},
+        {"name": "Casemiro", "pos": "MF", "club": "Man United", "age": 33, "goals": 2, "form": 7.1},
+        {"name": "Alisson", "pos": "GK", "club": "Liverpool", "age": 32, "goals": 0, "form": 8.9}
+      ],
+      "avg_age": 27, "goals_per_game": 2.3, "defense_rating": 86, "attack_rating": 95
+    },
+    "ENG": {
+      "players": [
+        {"name": "Jude Bellingham", "pos": "MF", "club": "Real Madrid", "age": 21, "goals": 10, "form": 9.5},
+        {"name": "Harry Kane", "pos": "FW", "club": "Bayern Munich", "age": 32, "goals": 14, "form": 9.1},
+        {"name": "Phil Foden", "pos": "MF", "club": "Man City", "age": 26, "goals": 7, "form": 8.7},
+        {"name": "Bukayo Saka", "pos": "FW", "club": "Arsenal", "age": 24, "goals": 9, "form": 9.0},
+        {"name": "Declan Rice", "pos": "MF", "club": "Arsenal", "age": 26, "goals": 4, "form": 8.8},
+        {"name": "Jordan Pickford", "pos": "GK", "club": "Everton", "age": 32, "goals": 0, "form": 7.9}
+      ],
+      "avg_age": 27, "goals_per_game": 2.2, "defense_rating": 87, "attack_rating": 91
+    },
+    "ESP": {
+      "players": [
+        {"name": "Pedri", "pos": "MF", "club": "Barcelona", "age": 23, "goals": 5, "form": 9.0},
+        {"name": "Lamine Yamal", "pos": "FW", "club": "Barcelona", "age": 18, "goals": 8, "form": 9.3},
+        {"name": "Álvaro Morata", "pos": "FW", "club": "AC Milan", "age": 32, "goals": 6, "form": 7.7},
+        {"name": "Ferran Torres", "pos": "FW", "club": "Barcelona", "age": 24, "goals": 5, "form": 7.8},
+        {"name": "Rodri", "pos": "MF", "club": "Man City", "age": 28, "goals": 3, "form": 9.1},
+        {"name": "David Raya", "pos": "GK", "club": "Arsenal", "age": 29, "goals": 0, "form": 8.5}
+      ],
+      "avg_age": 26, "goals_per_game": 2.0, "defense_rating": 90, "attack_rating": 90
+    },
+    "ARG": {
+      "players": [
+        {"name": "Lionel Messi", "pos": "FW", "club": "Inter Miami", "age": 39, "goals": 7, "form": 8.9},
+        {"name": "Ángel Di María", "pos": "FW", "club": "Benfica", "age": 38, "goals": 4, "form": 7.5},
+        {"name": "Rodrigo De Paul", "pos": "MF", "club": "Atlético Madrid", "age": 30, "goals": 3, "form": 8.0},
+        {"name": "Alexis Mac Allister", "pos": "MF", "club": "Liverpool", "age": 26, "goals": 5, "form": 8.6},
+        {"name": "Emiliano Martínez", "pos": "GK", "club": "Aston Villa", "age": 32, "goals": 0, "form": 9.0},
+        {"name": "Lautaro Martínez", "pos": "FW", "club": "Inter Milan", "age": 27, "goals": 10, "form": 8.8}
+      ],
+      "avg_age": 32, "goals_per_game": 1.9, "defense_rating": 85, "attack_rating": 89
+    },
+    "GER": {
+      "players": [
+        {"name": "Florian Wirtz", "pos": "MF", "club": "Bayer Leverkusen", "age": 22, "goals": 8, "form": 9.1},
+        {"name": "Jamal Musiala", "pos": "FW", "club": "Bayern Munich", "age": 22, "goals": 7, "form": 8.9},
+        {"name": "Kai Havertz", "pos": "FW", "club": "Arsenal", "age": 25, "goals": 9, "form": 8.7},
+        {"name": "Joshua Kimmich", "pos": "MF", "club": "Bayern Munich", "age": 29, "goals": 2, "form": 8.5},
+        {"name": "Toni Kroos", "pos": "MF", "club": "Real Madrid", "age": 35, "goals": 1, "form": 7.8},
+        {"name": "Manuel Neuer", "pos": "GK", "club": "Bayern Munich", "age": 40, "goals": 0, "form": 7.5}
+      ],
+      "avg_age": 29, "goals_per_game": 2.0, "defense_rating": 89, "attack_rating": 90
+    }
+  }
+}

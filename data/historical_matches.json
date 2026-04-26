@@ -1,0 +1,38 @@
+{
+  "matches": [
+    {"year": 2022, "stage": "Final", "team1": "Argentina", "team2": "France", "score1": 3, "score2": 3, "winner": "Argentina", "method": "Penalties"},
+    {"year": 2022, "stage": "Semi", "team1": "Argentina", "team2": "Croatia", "score1": 3, "score2": 0, "winner": "Argentina", "method": "FT"},
+    {"year": 2022, "stage": "Semi", "team1": "France", "team2": "Morocco", "score1": 2, "score2": 0, "winner": "France", "method": "FT"},
+    {"year": 2022, "stage": "QF", "team1": "Argentina", "team2": "Netherlands", "score1": 2, "score2": 2, "winner": "Argentina", "method": "Penalties"},
+    {"year": 2022, "stage": "QF", "team1": "France", "team2": "England", "score1": 2, "score2": 1, "winner": "France", "method": "FT"},
+    {"year": 2022, "stage": "QF", "team1": "Morocco", "team2": "Portugal", "score1": 1, "score2": 0, "winner": "Morocco", "method": "FT"},
+    {"year": 2022, "stage": "QF", "team1": "Croatia", "team2": "Brazil", "score1": 1, "score2": 1, "winner": "Croatia", "method": "Penalties"},
+    {"year": 2018, "stage": "Final", "team1": "France", "team2": "Croatia", "score1": 4, "score2": 2, "winner": "France", "method": "FT"},
+    {"year": 2018, "stage": "Semi", "team1": "France", "team2": "Belgium", "score1": 1, "score2": 0, "winner": "France", "method": "FT"},
+    {"year": 2018, "stage": "Semi", "team1": "Croatia", "team2": "England", "score1": 2, "score2": 1, "winner": "Croatia", "method": "AET"},
+    {"year": 2014, "stage": "Final", "team1": "Germany", "team2": "Argentina", "score1": 1, "score2": 0, "winner": "Germany", "method": "AET"},
+    {"year": 2014, "stage": "Semi", "team1": "Germany", "team2": "Brazil", "score1": 7, "score2": 1, "winner": "Germany", "method": "FT"},
+    {"year": 2010, "stage": "Final", "team1": "Spain", "team2": "Netherlands", "score1": 1, "score2": 0, "winner": "Spain", "method": "AET"},
+    {"year": 2006, "stage": "Final", "team1": "Italy", "team2": "France", "score1": 1, "score2": 1, "winner": "Italy", "method": "Penalties"},
+    {"year": 2002, "stage": "Final", "team1": "Brazil", "team2": "Germany", "score1": 2, "score2": 0, "winner": "Brazil", "method": "FT"},
+    {"year": 1998, "stage": "Final", "team1": "France", "team2": "Brazil", "score1": 3, "score2": 0, "winner": "France", "method": "FT"},
+    {"year": 1994, "stage": "Final", "team1": "Brazil", "team2": "Italy", "score1": 0, "score2": 0, "winner": "Brazil", "method": "Penalties"},
+    {"year": 1990, "stage": "Final", "team1": "Germany", "team2": "Argentina", "score1": 1, "score2": 0, "winner": "Germany", "method": "FT"},
+    {"year": 1986, "stage": "Final", "team1": "Argentina", "team2": "Germany", "score1": 3, "score2": 2, "winner": "Argentina", "method": "FT"},
+    {"year": 1982, "stage": "Final", "team1": "Italy", "team2": "Germany", "score1": 3, "score2": 1, "winner": "Italy", "method": "FT"}
+  ],
+  "h2h": {
+    "France_Brazil": {"france": 4, "draw": 3, "brazil": 5},
+    "France_Argentina": {"france": 3, "draw": 2, "argentina": 4},
+    "France_Germany": {"france": 3, "draw": 2, "germany": 4},
+    "France_England": {"france": 8, "draw": 7, "england": 11},
+    "Brazil_Argentina": {"brazil": 10, "draw": 9, "argentina": 7},
+    "Brazil_Germany": {"brazil": 6, "draw": 4, "germany": 5},
+    "Brazil_England": {"brazil": 7, "draw": 3, "england": 5},
+    "Germany_Argentina": {"germany": 5, "draw": 4, "argentina": 4},
+    "Germany_England": {"germany": 6, "draw": 4, "england": 5},
+    "Spain_Germany": {"spain": 3, "draw": 5, "germany": 7},
+    "Spain_Brazil": {"spain": 4, "draw": 5, "brazil": 7},
+    "England_Argentina": {"england": 5, "draw": 3, "argentina": 7}
+  }
+}
