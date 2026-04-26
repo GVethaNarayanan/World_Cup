@@ -368,8 +368,8 @@ async function runPredictor() {
 
   console.log("Calling API...");
 
-  try {
-    const url = `https://worldcup-predictor.hub.zerve.cloud/predict?team1=${t1.name}&team2=${t2.name}`;
+  try { 
+   const url = `https://worldcup-predictor.hub.zerve.cloud/predict?team1=${encodeURIComponent(t1.name)}&team2=${encodeURIComponent(t2.name)}`;
     
     const response = await fetch(url);
     const result = await response.json();
@@ -393,6 +393,14 @@ async function runPredictor() {
     document.getElementById('pr-bar2').style.width = (result.team2_win * 100) + '%';
 
     document.getElementById('pred-result').style.display = 'block';
+    const prob = {
+      win: result.team1_win,
+      draw: result.draw,
+      lose: result.team2_win
+    };
+
+buildRadarChart(t1, t2);
+buildEloBar(t1, t2, prob);
 
   } catch (error) {
     console.error("❌ API ERROR:", error);
