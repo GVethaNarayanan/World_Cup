@@ -275,7 +275,6 @@ function simulateGroups() {
     for (let i = 0; i < teams.length; i++) {
       for (let j = i + 1; j < teams.length; j++) {
         const a = teams[i], b = teams[j];
-        const prob = calcMatchProbs(a.elo, b.elo);
         const r = Math.random();
         if (r < prob.win) {
           // A wins
@@ -353,7 +352,6 @@ function populateSelects() {
   }).join('');
   document.getElementById('squad-team').innerHTML = squadOpts;
 }
-
 async function runPredictor() {
   console.log("BUTTON CLICKED");
 
@@ -365,18 +363,30 @@ async function runPredictor() {
   const t1 = ELO_DATA.teams.find(t => t.code === code1);
   const t2 = ELO_DATA.teams.find(t => t.code === code2);
 
+  if (!t1 || !t2) {
+    console.error("Teams not found");
+    return;
+  }
+
   console.log("Calling API...");
 
   try {
     const res = await fetch(
-      `https://worldcup-predictor.hub.zerve.cloud/predict?team1=${t1.name}&team2=${t2.name}`
+      `https://worldcup-predictor.hub.zerve.cloud/predict?team1=${encodeURIComponent(t1.name)}&team2=${encodeURIComponent(t2.name)}`
     );
 
-    const data = await res.json();
+    if (!res.ok) throw new Error("API failed");
 
+    const data = await res.json();
     console.log("API RESULT:", data);
 
-    // UPDATE UI WITH API DATA
+    // ================= UI UPDATE =================
+    document.getElementById('pr-flag1').innerHTML = flagImg(t1.code, 72);
+    document.getElementById('pr-name1').textContent = data.team1;
+
+    document.getElementById('pr-flag2').innerHTML = flagImg(t2.code, 72);
+    document.getElementById('pr-name2').textContent = data.team2;
+
     document.getElementById('pr-pct1').textContent = (data.team1_win * 100).toFixed(1) + '%';
     document.getElementById('pr-pct2').textContent = (data.team2_win * 100).toFixed(1) + '%';
     document.getElementById('pr-draw').textContent = (data.draw * 100).toFixed(1) + '%';
@@ -385,19 +395,48 @@ async function runPredictor() {
     document.getElementById('pr-bar2').style.width = (data.team2_win * 100) + '%';
     document.getElementById('pr-bar-draw').style.width = (data.draw * 100) + '%';
 
-    document.getElementById('pr-name1').textContent = data.team1;
-    document.getElementById('pr-name2').textContent = data.team2;
+    document.getElementById('pred-result').style.display = 'block';
+
+    // Convert API → chart format
+    const prob = {
+      win: data.team1_win,
+      lose: data.team2_win,
+      draw: data.draw
+    };
+
+    buildRadarChart(t1, t2);
+    buildEloBar(t1, t2, prob);
+
+  } catch (err) {
+    console.error("API ERROR → using fallback", err);
+
+    // ===== FALLBACK (your old ELO logic) =====
+    const prob = calcMatchProbs(t1.elo, t2.elo);
+
+    document.getElementById('pr-flag1').innerHTML = flagImg(t1.code, 72);
+    document.getElementById('pr-name1').textContent = t1.name;
+
+    document.getElementById('pr-flag2').innerHTML = flagImg(t2.code, 72);
+    document.getElementById('pr-name2').textContent = t2.name;
+
+    document.getElementById('pr-pct1').textContent = (prob.win * 100).toFixed(1) + '%';
+    document.getElementById('pr-pct2').textContent = (prob.lose * 100).toFixed(1) + '%';
+    document.getElementById('pr-draw').textContent = (prob.draw * 100).toFixed(1) + '%';
+
+    document.getElementById('pr-bar1').style.width = (prob.win * 100) + '%';
+    document.getElementById('pr-bar2').style.width = (prob.lose * 100) + '%';
+    document.getElementById('pr-bar-draw').style.width = (prob.draw * 100) + '%';
 
     document.getElementById('pred-result').style.display = 'block';
 
-    // OPTIONAL: keep charts if needed
     buildRadarChart(t1, t2);
-    buildEloBar(t1, t2);
-
-  } catch (err) {
-    console.error("API ERROR:", err);
+    buildEloBar(t1, t2, prob);
   }
 }
+
+
+
+
 function quickPredict(code) {
   document.getElementById('pred-team1').value = code;
   document.getElementById('predictor').scrollIntoView({ behavior: 'smooth' });
